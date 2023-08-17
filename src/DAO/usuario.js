@@ -1,23 +1,24 @@
-export const selectUser = (db) => {
+export const selectUser = (db, callback) => {
     db.all(`SELECT * FROM "Usuario"`, (error, rows) => {
         if (error) {
-          return { mensagem: "ocorreu um erro: " + error.message };
+            callback({ mensagem: "Ocorreu um erro: " + error.message }, null);
         } else {
-          return { resposta: rows };
+            callback(null, { resposta: rows });
         }
-      });
-    };
-export const insertUser = (db,ModelDado) => {
-    db.run(`INSERT INTO "Usuario"(ID, name, email, senha) values(?,?,?,?)`, [
+    });
+};
+
+export const insertUser = (db, ModelDado, callback) => {
+    db.run(`INSERT INTO "Usuario" (ID, name, email, senha) VALUES (?, ?, ?, ?)`, [
         ModelDado.ID,
         ModelDado.name,
         ModelDado.email,
         ModelDado.senha
     ], (error) => {
-        if(error){
-            return "Ocorreu um erro: " + error.messsage;
-        }else{
-            return "Usuário cadastrado com sucesso!";
+        if (error) {
+            callback("Ocorreu um erro: " + error.message);
+        } else {
+            callback("Usuário cadastrado com sucesso!");
         }
     });
 };

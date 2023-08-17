@@ -1,4 +1,4 @@
-import { insertProduct, selectProduct} from "../DAO/produto.js";
+import {insertProduct, selectProduct} from "../DAO/produto.js";
 import ProductModel from "../models/produto.js";
 
 const productControl = (app, db) => {

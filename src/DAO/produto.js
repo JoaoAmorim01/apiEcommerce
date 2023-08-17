@@ -13,4 +13,18 @@ const insertProduct = (db,ModelData) => {
     });
 };
 
-export default insertProduct; 
+const selectProduct = (db) => {
+    db.all(
+        `SELECT * from "Produto"`,
+        (error, rows) => {
+            if (error) {
+                return "Ocorreu um erro: " + error.messsage;
+            } else {
+                return rows;
+            }
+        }
+
+    );
+};
+
+export {insertProduct, selectProduct}; 
